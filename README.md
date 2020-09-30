@@ -12,7 +12,8 @@ This project explore COVID-19 using the [JHU CSSE Covid-19](https://github.com/C
 
 ```
 proj/
-├── dev/
+├── app/
+├── lib/
 ├── data/
 ├── doc/
 ├── fig/
