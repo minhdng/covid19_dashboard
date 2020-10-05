@@ -69,13 +69,13 @@ data_cooker <- function(df){
     df$Country.Region[df$Country.Region == "Western Sahara"]<-"W. Sahara"
     df$Country.Region[df$Country.Region == "Eswatini"] <- "eSwatini"
     df$Country.Region[df$Country.Region == "Taiwan*"] <- "Taiwan"
-    df$Country.Region[df$Country.Region== "Cote d'Ivoire"] <-"Côte d'Ivoire"
+    df$Country.Region[df$Country.Region == "Cote d'Ivoire"] <-"Côte d'Ivoire"
     df$Country.Region[df$Country.Region == "Korea, South"] <- "South Korea"
     df$Country.Region[df$Country.Region == "Bosnia and Herzegovina"] <- "Bosnia and Herz."
     df$Country.Region[df$Country.Region == "US"] <- "United States of America"
     df$Country.Region[df$Country.Region == "Burma"]<-"Myanmar"
     df$Country.Region[df$Country.Region == "Holy See"]<-"Vatican"
-    df$Country.Region[df$Country.Region=="South Sudan"]<-"S. Sudan"
+    df$Country.Region[df$Country.Region =="South Sudan"]<-"S. Sudan"
     return(df)
 }
 
@@ -117,22 +117,22 @@ Death_URL <- getURL("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/m
 global_death <- read.csv(text = Death_URL)
 
 
-#get aggregate cases 
+# get aggregate cases 
 aggre_cases <- as.data.frame(data_transformer(global_cases))
-#get aggregate death
+# get aggregate death
 aggre_death <- as.data.frame(data_transformer(global_death))
-#define date_choices 
+# define date_choices 
 date_choices <- as.Date(colnames(aggre_cases),format = '%Y-%m-%d')
-#define country_names
+# define country_names
 country_names_choices <- rownames(aggre_cases)
 
-#Download the spatial polygons dataframe in this link
+# Download the spatial polygons dataframe in this link
 # https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/
 
 output_shapefile_filepath <- "./output/countries_shapeFile.RData"
 
-#if already has countries_shapeFile.RData under output folder, no need to process it again
-#otherwise, read files from data folder to create countries_shapeFile.RData under output folder
+# if already has countries_shapeFile.RData under output folder, no need to process it again
+# otherwise, read files from data folder to create countries_shapeFile.RData under output folder
 if(file.exists(output_shapefile_filepath)){
     load(output_shapefile_filepath)
 }else{
@@ -144,15 +144,15 @@ if(file.exists(output_shapefile_filepath)){
 }
 
 
-#make a copy of aggre_cases dataframe
+# make a copy of aggre_cases dataframe
 aggre_cases_copy <- as.data.frame(aggre_cases)
 aggre_cases_copy$country_names <- as.character(rownames(aggre_cases_copy))
 
-#make a copy of aggre_death dataframe
+# make a copy of aggre_death dataframe
 aggre_death_copy <- as.data.frame(aggre_death)
 aggre_death_copy$country_names <- as.character(rownames(aggre_death_copy))
 
 binning<- function(x) {10^(ceiling(log10(x)))}
 
-#use save.image() at any time to save all environment data into an .RData file
+# use save.image() at any time to save all environment data into an .RData file
 save.image(file='./output/covid-19.RData')
