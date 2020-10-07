@@ -4,7 +4,7 @@
 
 ## Description
 
-This project explore COVID-19 using the [JHU CSSE Covid-19](https://github.com/CSSEGISandData/COVID-19) Data and the [NYC Health open data](https://github.com/nychealth/coronavirus-data) released by the NYC Coronavirus Disease 2019 Data. 
+This project explore COVID-19 using the [JHU CSSE Covid-19](https://github.com/CSSEGISandData/COVID-19) Data and the [NYC Health open data](https://github.com/nychealth/coronavirus-data) released by the NYC Coronavirus Disease 2019 Data. The purpose is to create an interactive dashboard for public use
 
 ## Presentation
 
