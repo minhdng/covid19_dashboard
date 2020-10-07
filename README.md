@@ -26,3 +26,4 @@ See the subfolder `README.md` file for more information.
 ## Collaborators
 
 [salmonkween](https://github.com/salmonkween)
+[minhdng](https://github.com/minhdng)
