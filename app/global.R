@@ -58,7 +58,7 @@ if (!require("viridis")) {
     library(viridis)
 }
 #--------------------------------------------------------------------
-###############################Define Functions#######################
+###############################Define Global Functions#######################
 data_cooker <- function(df){
     #input dataframe and change the Country/Region column into standard format
     #rename country region
@@ -69,7 +69,7 @@ data_cooker <- function(df){
     df$Country.Region[df$Country.Region == "Central African Republic"] <- "Central African Rep."
     df$Country.Region[df$Country.Region == "Equatorial Guinea"] <- "Eq. Guinea"
     df$Country.Region[df$Country.Region == "Western Sahara"]<-"W. Sahara"
-    df$Country.Region[df$Country.Region == "Eswatini"] <- "eSwatini"
+    df$Country.Region[df$Country.Region == "Eswatini"] <- "Eswatini"
     df$Country.Region[df$Country.Region == "Taiwan*"] <- "Taiwan"
     df$Country.Region[df$Country.Region == "Cote d'Ivoire"] <-"Côte d'Ivoire"
     df$Country.Region[df$Country.Region == "Korea, South"] <- "South Korea"
@@ -88,20 +88,26 @@ data_transformer <- function(df) {
     ##rownames equal to countries name, and colnames equals date
     #################################################################
     #clean the country/regionnames
+    
+    
     df <- data_cooker(df)
     #columns that don't need 
     not_select_cols <- c("Province.State","Lat","Long")
     #aggregate the province into country level
+    #group by country.region, remove 3 selected column
     aggre_df <- df %>% group_by(Country.Region) %>% 
         select(-one_of(not_select_cols)) %>% summarise_all(sum)
+    
     #assign the country name into row names 
     aggre_df <- aggre_df %>% remove_rownames %>% 
         tibble::column_to_rownames(var="Country.Region")
+    
     #change the colume name into date format
     date_name <- colnames(aggre_df)
     #change e.g: "x1.22.20" -> "2020-01-22"
     date_choices <- as.Date(date_name,format = 'X%m.%d.%y')
-    #assign column nam
+    
+    #assign column name
     colnames(aggre_df) <- date_choices
     return(aggre_df)
 }
@@ -126,14 +132,69 @@ global_death <- read.csv(text = Death_URL)
 DeathUS_URL<-getURL("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv")
 US_death<-read.csv(text=DeathUS_URL)
 
-# get aggregate cases 
-aggre_cases <- as.data.frame(data_transformer(global_cases))
+
+##################Transforming global data using criteria set above
+###################################3
+
+# get global aggregate cases 
+globalaggre_cases <- as.data.frame(data_transformer(global_cases))
 # get aggregate death
-aggre_death <- as.data.frame(data_transformer(global_death))
+globalaggre_death <- as.data.frame(data_transformer(global_death))
+
+#######make 2 new varuables: dates_choices, country_name_choices
 # define date_choices 
-date_choices <- as.Date(colnames(aggre_cases),format = '%Y-%m-%d')
+date_choices <- as.Date(colnames(globalaggre_cases),format = '%Y-%m-%d')
 # define country_names
-country_names_choices <- rownames(aggre_cases)
+country_names_choices <- rownames(globalaggre_cases)
+
+
+
+#--------------------------------------------------------------------
+###############################Define USA Functions#######################
+
+USdata_transformer <- function(df2) {
+    #################################################################
+    #Tranform the US dataframe into aggregate level with
+    ##rownames equal to State name, and colnames equals date
+    #################################################################
+    
+        #columns that don't need 
+    not_select_colsUS <- c("UID","iso2", "iso3", "code3", "FIPS", "Admin2", "Country_Region","Lat","Long_", "Combined_Key", "Population")
+    #aggregate Province_State into single Province
+    #group by Province, remove selected columns
+    aggre_df2 <- df2 %>% group_by(Province_State) %>% 
+        select(-one_of(not_select_colsUS)) %>% summarise_all(sum)
+    
+    #assign the country name into row names 
+    aggre_df2 <- aggre_df2 %>% remove_rownames %>% 
+        tibble::column_to_rownames(var="Province_State")
+    
+    #change the colume name into date format
+    date_name2 <- colnames(aggre_df2)
+    #change e.g: "x1.22.20" -> "2020-01-22"
+    date_choices2 <- as.Date(date_name2, format = 'X%m.%d.%y')
+    
+    #assign column name
+    colnames(aggre_df2) <- date_choices2
+    return(aggre_df2)
+}
+
+
+##################Transforming global data using criteria set above
+###################################3
+
+# get US aggregate cases 
+USaggre_cases <- as.data.frame(USdata_transformer(US_cases))
+# get aggregate death
+USaggre_death <- as.data.frame(USdata_transformer(US_death))
+
+#######make 2 new variables: dates_choices, state_name_choices
+# define date_choices 
+USdate_choices <- as.Date(colnames(USaggre_cases),format = '%Y-%m-%d')
+# define state_names
+state_names_choices <- rownames(USaggre_cases)
+
+
 
 # Download the spatial polygons dataframe in this link
 # https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/
