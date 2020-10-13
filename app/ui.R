@@ -1,7 +1,6 @@
 # Packages
 library(shiny)
 library(shinythemes)
-
 library(viridis)
 library(dplyr)
 library(tibble)
@@ -11,9 +10,9 @@ library(RCurl)
 library(tmap)
 library(rgdal)
 library(leaflet)
-
 library(plotly)
 library(ggplot2)
+
 
 
 # Load data compiled by global.R

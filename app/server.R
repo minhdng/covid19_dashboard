@@ -1,8 +1,6 @@
-# Project
+# Packages
 library(shiny)
 library(shinythemes)
-
-
 library(viridis)
 library(dplyr)
 library(tibble)
@@ -12,10 +10,11 @@ library(RCurl)
 library(tmap)
 library(rgdal)
 library(leaflet) #
-
-
 library(plotly)
 library(ggplot2)
+
+
+
 # can run RData directly to get the necessary date for the app
 # global.r will enable us to get new data everyday
 # update data with automated script
