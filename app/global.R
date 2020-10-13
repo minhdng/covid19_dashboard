@@ -119,8 +119,12 @@ global_death <- read.csv(text = Death_URL)
 
 # get aggregate cases 
 aggre_cases <- as.data.frame(data_transformer(global_cases))
+aggre_cases_log <- log(aggre_cases)
+
 # get aggregate death
 aggre_death <- as.data.frame(data_transformer(global_death))
+aggre_death_log <- log(aggre_death)
+
 # define date_choices 
 date_choices <- as.Date(colnames(aggre_cases),format = '%Y-%m-%d')
 # define country_names
@@ -144,13 +148,17 @@ if(file.exists(output_shapefile_filepath)){
 }
 
 
-# make a copy of aggre_cases dataframe
+# make a copy of aggre_cases and aggre_cases_log dataframe
 aggre_cases_copy <- as.data.frame(aggre_cases)
+aggre_cases_log_copy <- as.data.frame(aggre_cases_log)
 aggre_cases_copy$country_names <- as.character(rownames(aggre_cases_copy))
+aggre_cases_log_copy$country_names <- as.character(rownames(aggre_cases_log_copy))
 
-# make a copy of aggre_death dataframe
+# make a copy of aggre_death and aggre_death_log dataframe
 aggre_death_copy <- as.data.frame(aggre_death)
+aggre_death_log_copy <- as.data.frame(aggre_death_log)
 aggre_death_copy$country_names <- as.character(rownames(aggre_death_copy))
+aggre_death_log_copy$country_names <- as.character(rownames(aggre_death_log_copy))
 
 binning<- function(x) {10^(ceiling(log10(x)))}
 
