@@ -61,6 +61,8 @@ if (!require("viridis")) {
 ###############################Define Functions#######################
 data_cooker <- function(df){
     #input dataframe and change the Country/Region column into standard format
+    #rename country region
+    
     df$Country.Region <- as.character(df$Country.Region)
     df$Country.Region[df$Country.Region == "Congo (Kinshasa)"] <- "Dem. Rep. Congo"
     df$Country.Region[df$Country.Region == "Congo (Brazzaville)"] <- "Congo"
@@ -112,10 +114,17 @@ Lancet Inf Dis. 20(5):533-534. doi: 10.1016/S1473-3099(20)30120-1"
 Cases_URL <- getURL("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
 global_cases <- read.csv(text = Cases_URL)
 
+#get the daily US cases
+CasesUS_URL<-getURL("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv")
+US_cases<-read.csv(text=CasesUS_URL)
+
 #get the daily global deaths data from API
 Death_URL <- getURL("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv")
 global_death <- read.csv(text = Death_URL)
 
+#get the daily US deaths data
+DeathUS_URL<-getURL("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv")
+US_death<-read.csv(text=DeathUS_URL)
 
 # get aggregate cases 
 aggre_cases <- as.data.frame(data_transformer(global_cases))
