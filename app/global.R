@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 ############################# Install Packages #######################
 # template:
 #   if (!require("PACKAGE")) {install.packages("PACKAGE"); library(PACKAGE) }
@@ -365,4 +362,4 @@ nyc_res_map <- res_dat %>%
 ############################### Export ###############################
 # use save.image() at any time to save all environment data into an .RData file
 save.image(file="./output/covid-19.RData")
->>>>>>> 70400a28fcf34799ae12bf1d098ae7b306d50d1b
+

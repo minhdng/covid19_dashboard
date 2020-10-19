@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 # can run RData directly to get the necessary date for the app
 # global.r will enable us to get new data everyday
 # update data with automated script
@@ -368,5 +365,4 @@ shinyServer(function(input, output) {
 
 
 
-    
->>>>>>> 70400a28fcf34799ae12bf1d098ae7b306d50d1b
+

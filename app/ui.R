@@ -1,25 +1,18 @@
-<<<<<<< HEAD
-
-=======
 # Load data compiled by global.R
 load('./output/covid-19.RData')
 
 
 
->>>>>>> 70400a28fcf34799ae12bf1d098ae7b306d50d1b
 
 
 body <- dashboardBody( 
     shinyDashboardThemes(theme = "poor_mans_flatly"),
     
-<<<<<<< HEAD
 
-=======
     tabItems(
         
         # tab panel 1 - Global ---------------------------------------------------
         tabItem(tabName = "global",
->>>>>>> 70400a28fcf34799ae12bf1d098ae7b306d50d1b
                 
                 fluidPage( 
                     
@@ -30,10 +23,7 @@ body <- dashboardBody(
                         
                         valueBox( prettyNum(getLastestCount(confirmed_global_daily), big.mark = ","), 
                                   subtitle="Cases today", color="purple", width = 2, icon = icon("hospital-user")),                            
-                        
-<<<<<<< HEAD
 
-=======
                         valueBox( prettyNum(getLastestCount(deaths_global), big.mark = ","), 
                                   subtitle="Deaths globally", color="olive", width = 3, icon = icon("skull")),
                         
@@ -54,7 +44,6 @@ body <- dashboardBody(
                             column(4, highchartOutput('plotGlobalCummulativeConfirmed')),
                             column(4, highchartOutput('plotGlobalCummulativeDeaths')),
                             column(4, highchartOutput('plotGlobalCummulativeRecovered'))
->>>>>>> 70400a28fcf34799ae12bf1d098ae7b306d50d1b
                         ),
                         
                         fluidRow(
@@ -165,9 +154,6 @@ body <- dashboardBody(
                                )
                     )
                 )
-<<<<<<< HEAD
-
-=======
         ) # end of tab panel 4
         
     ) # end of TabItems
@@ -191,7 +177,6 @@ ui <- dashboardPage(
             menuItem("By States", tabName = "US", icon = icon("flag-usa")),
             menuItem("NYC Map", tabName = "nyc_map", icon = icon("city")),
             menuItem("NYC Restaurants", tabName = "nyc_eat", icon = icon("utensils"))
->>>>>>> 70400a28fcf34799ae12bf1d098ae7b306d50d1b
         )
     ),
     
