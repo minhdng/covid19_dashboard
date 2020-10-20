@@ -8,6 +8,7 @@ load('./output/covid-19.RData')
 body <- dashboardBody( 
     shinyDashboardThemes(theme = "poor_mans_flatly"),
     
+
     tabItems(
         
         # tab panel 1 - Global ---------------------------------------------------
@@ -22,7 +23,7 @@ body <- dashboardBody(
                         
                         valueBox( prettyNum(getLastestCount(confirmed_global_daily), big.mark = ","), 
                                   subtitle="Cases today", color="purple", width = 2, icon = icon("hospital-user")),                            
-                        
+
                         valueBox( prettyNum(getLastestCount(deaths_global), big.mark = ","), 
                                   subtitle="Deaths globally", color="olive", width = 3, icon = icon("skull")),
                         

@@ -1,0 +1,10 @@
+name: covid-19-dashboard
+title:
+username:
+account: minh-d-nguyen
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3046406
+bundleId: 3757299
+url: https://minh-d-nguyen.shinyapps.io/covid-19-dashboard/
+when: 1603092646.68746

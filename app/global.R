@@ -15,6 +15,7 @@ if (!require("shinyjs")) {install.packages("shinyjs"); library(shinyjs) }
 if (!require("dashboardthemes")) {install.packages("dashboardthemes"); library(dashboardthemes)}
 # if (!require("sf")) {install.packages("sf"); library(sf)}
 
+
 # map
 if (!require("RCurl")) {install.packages("RCurl"); library(RCurl)}
 if (!require("tmap")) {install.packages("tmap"); library(tmap)}
@@ -297,7 +298,7 @@ nyc_zipcode_geo <- sf::st_read("./output/ZIP_CODE_040114/ZIP_CODE_040114.shp") %
 nyc_zipcode_geo$ZIPCODE <- type.convert(nyc_zipcode_geo$ZIPCODE)
 
 # import longitude and latitude data
-nyc_lat_data <- read.csv("../data/zc_geo.csv", sep= ";")
+nyc_lat_data <- read.csv("./output/zc_geo.csv", sep= ";")
 
 nyc_lat_table<-nyc_lat_data %>%
     select("Zip", "Latitude", "Longitude")
@@ -362,3 +363,9 @@ nyc_res_map <- res_dat %>%
 ############################### Export ###############################
 # use save.image() at any time to save all environment data into an .RData file
 save.image(file="./output/covid-19.RData")
+
+
+
+############################### Deploy ###############################
+#library(rsconnect)
+#deployApp()
