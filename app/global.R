@@ -281,7 +281,7 @@ zcta_to_modzctaURL <- getURL("https://raw.githubusercontent.com/nychealth/corona
 zcta_to_modzcta <- read.csv( text=zcta_to_modzctaURL )
 
 # NYC Covid data by MODZCTA:
-data_by_modzctaURL <- getURL('https://raw.githubusercontent.com/nychealth/coronavirus-data/master/data-by-modzcta.csv')
+data_by_modzctaURL <- getURL('https://raw.githubusercontent.com/nychealth/coronavirus-data/master/totals/data-by-modzcta.csv')
 data_by_modzcta <- read.csv( text=data_by_modzctaURL )
 
 # get nyc neighborhoods
@@ -315,7 +315,7 @@ nyc_neighborhoods <- nyc_neighborhoods %>%
     )
 
 # data for line chart and positive rate
-nyc_recent_4w_URL <- getURL("https://raw.githubusercontent.com/nychealth/coronavirus-data/master/recent/recent-4-week-by-modzcta.csv")
+nyc_recent_4w_URL <- getURL("https://raw.githubusercontent.com/nychealth/coronavirus-data/master/archive/recent-4-week-by-modzcta.csv")
 nyc_recent_4w_cases <- read.csv(text = nyc_recent_4w_URL)
 
 # recent_use_dat
